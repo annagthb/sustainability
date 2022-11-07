@@ -6,15 +6,15 @@ import math
 from scipy.spatial import distance
 
 class AddressPointService:
-    def __init__(self,algorithm,addressPoint,polygonPoints):
+    def __init__(self,addressPoint,polygonPoints,algorithm=Distance.Default,):
         self.addressPoint=np.array(addressPoint)
         self.polygonPoints=np.array(polygonPoints)
         self.matchingPolygon=[]
         self.minDistance=0
-        self.process(algorithm)
+        self.algorithm=algorithm
 
-    def process(self,algorithm=Distance.Default):
-        self.calculateDistance(algorithm)
+    def process(self):
+        self.calculateDistance(self.algorithm)
 
     def calculateDistance(self,algorithm):
         if (algorithm==Distance.Nearest):
