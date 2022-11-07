@@ -1,5 +1,5 @@
-from addressPointService import AddressPointService
-from distanceAlgorithm import Distance
+from app.addressPointService import AddressPointService
+from app.distanceAlgorithm import Distance
 
 address1=AddressPointService(Distance.Default,[7,8],[[1,2],[4,5],[8,9]])
 address1.printResults()

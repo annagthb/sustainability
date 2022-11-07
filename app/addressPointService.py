@@ -1,8 +1,7 @@
-
 import numpy as np
 import pandas as pd
 import scipy as sp
-from distanceAlgorithm import Distance
+from app.distanceAlgorithm import Distance
 import math
 from scipy.spatial import distance
 
