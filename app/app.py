@@ -1,13 +1,13 @@
-from app.addressPointService import AddressPointService
-from app.distanceAlgorithm import Distance
+from addressPointService import AddressPointService
+from distanceAlgorithm import Distance
 
 
-address1=AddressPointService(Distance.Default,[7,8],[[1,2],[4,5],[8,9]])
+address1=AddressPointService([7,8],[[1,2],[4,5],[8,9]],Distance.Default)
 address1.process()
-address1.printResults()
+print(address1)
 
 
-address2=AddressPointService(Distance.Spatial,[7,8],[[1,2],[4,5],[8,9]])
+address2=AddressPointService([7,8],[[1,2],[4,5],[8,9]],Distance.Default)
 address2.process()
-address2.printResults()
+print(address2)
 

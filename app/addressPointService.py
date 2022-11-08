@@ -1,9 +1,10 @@
 import numpy as np
 import pandas as pd
 import scipy as sp
-from app.distanceAlgorithm import Distance
+from distanceAlgorithm import Distance
 import math
 from scipy.spatial import distance
+import json
 
 class AddressPointService:
     def __init__(self,addressPoint,polygonPoints,algorithm=Distance.Default,):
@@ -15,6 +16,8 @@ class AddressPointService:
 
     def process(self):
         self.calculateDistance(self.algorithm)
+        jsonStr=json.loads(self.to_json())
+        return jsonStr#json.loads(jsonStr)
 
     def calculateDistance(self,algorithm):
         if (algorithm==Distance.Nearest):
@@ -24,7 +27,7 @@ class AddressPointService:
         elif(algorithm==Distance.Spatial):
             self.applySpatialDistance
         else:
-            self.applyDefaultDistance()
+            self.applyEuclideanDistance()
 
     def applyNearest(self):
         pass
@@ -49,6 +52,12 @@ class AddressPointService:
         self.minDistance=minDistance
         self.matchingPolygon=self.polygonPoints[polygonId]
 
-    def printResults(self):
-        print("the matching polygon is {polygon} and its distance from the given address is {distance}".format(polygon=self.matchingPolygon,distance=self.minDistance))
+    def to_json(self):
+        return json.dumps({"polygon":np.array2string(self.matchingPolygon),"distance":self.minDistance})
+
+    def getMatchingPolygonStr(self):
+        return str(self.matchingPolygon.tolist() is not None and self.matchingPolygon.tolist() or "")
+
+    def __str__(self):
+        return "the matching polygon is {polygon} and its distance from the given address is {distance}".format(polygon=self.matchingPolygon,distance=self.minDistance)
 
